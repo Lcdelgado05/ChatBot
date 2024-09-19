@@ -9,6 +9,14 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@0.263.1/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+    <!-- Estilo para Chatbot -->
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -123,56 +131,174 @@
         }
     </style>
 </head>
-<body>
-    <header class="bg-green-800 text-white py-4">
-        <div class="container mx-auto px-4">
-            <h1 class="text-3xl font-bold">AgroTOÑO</h1>
+
+<body class="font-sans">
+    <!-- Barra de navegación -->
+    <header class="bg-green-700 text-white">   
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">AgroTOÑO</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="#" class="hover:text-green-200">Inicio</a></li>
+                    <li><a href="#servicios" class="hover:text-green-200">Servicios</a></li>
+                    <li><a href="#por-que-elegirnos" class="hover:text-green-200">¿Por qué elegirnos?</a></li>
+                    <li><a href="#contacto" class="hover:text-green-200">Contacto</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
+  <!-- Contenido principal -->
     <main>
-        <section class="hero py-20">
+        <section class="bg-green-600 text-white py-20">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-4xl font-bold mb-4">Proporcionando soluciones y consejos para una agricultura sostenible</h2>
+                <h2 class="text-4xl font-bold mb-4">Soluciones y Consejos para una Agricultura Sostenible</h2>
                 <p class="text-xl mb-8">Llevando tu cosecha por los caminos del éxito</p>
+                <a href="#" class="bg-white text-green-700 px-6 py-2 rounded-full font-semibold hover:bg-green-100 transition duration-300">Descubre Más</a>
             </div>
         </section>
 
+    <!-- Sección de Nuestro Trabajo -->
         <section class="py-16">
+            <!-- Carrusel de imágenes -->
             <div class="container mx-auto px-4">
-                <h3 class="text-2xl font-bold mb-8 text-center">Principales Problemas</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="challenge-card p-6">
+                <h3 class="text-3xl font-bold mb-8 text-center text-green-800">Nuestro Trabajo</h3>
+                <div class="image-carousel">
+                    <div><img src="img\C1.jpeg" alt="Imagen de cultivo 1" class="w-full h-64 object-cover"></div>
+                    <div><img src="img\C2.png" alt="Imagen de cultivo 2" class="w-full h-64 object-cover"></div>
+                    <div><img src="img\C3.jpg" alt="Imagen de cultivo 3" class="w-full h-64 object-cover"></div>
+                </div>
+            </div>
+        </section>
+    <!-- Sección de Servicios -->
+        <section id="servicios" class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <h3 class="text-3xl font-bold mb-12 text-center text-green-800">Nuestros Servicios</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <i class="fas fa-bug text-4xl text-green-600 mb-4"></i>
                         <h4 class="text-xl font-semibold mb-4">Control de Plagas</h4>
-                        <p>Consejos sobre cómo manejar plagas de manera efectiva y sostenible.</p>
+                        <p>Estrategias efectivas y sostenibles para el manejo de plagas en cultivos.</p>
                     </div>
-                    <div class="challenge-card p-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <i class="fas fa-tint text-4xl text-green-600 mb-4"></i>
                         <h4 class="text-xl font-semibold mb-4">Gestión del Agua</h4>
-                        <p>Recomendaciones para el uso eficiente del agua en la agricultura.</p>
+                        <p>Optimización del uso del agua para una agricultura más eficiente y sostenible.</p>
                     </div>
-                    <div class="challenge-card p-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <i class="fas fa-seedling text-4xl text-green-600 mb-4"></i>
                         <h4 class="text-xl font-semibold mb-4">Productividad del Suelo</h4>
-                        <p>Mejores prácticas para mantener y mejorar la salud del suelo.</p>
+                        <p>Técnicas avanzadas para mejorar y mantener la salud y fertilidad del suelo.</p>
                     </div>
                 </div>
             </div>
         </section>
+   <!-- Sección de Por Qué Elegirnos -->
+        <section id="por-que-elegirnos" class="py-16">
+            <div class="container mx-auto px-4 text-center">
+                <h3 class="text-3xl font-bold mb-8 text-green-800">¿Por qué elegir AgroTOÑO?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <i class="fas fa-check-circle text-4xl text-green-600 mb-4"></i>
+                        <h4 class="text-xl font-semibold mb-2">Experiencia</h4>
+                        <p>Años de experiencia en el sector agrícola</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <i class="fas fa-leaf text-4xl text-green-600 mb-4"></i>
+                        <h4 class="text-xl font-semibold mb-2">Sostenibilidad</h4>
+                        <p>Enfoque en prácticas agrícolas sostenibles</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <i class="fas fa-users text-4xl text-green-600 mb-4"></i>
+                        <h4 class="text-xl font-semibold mb-2">Soporte</h4>
+                        <p>Equipo de expertos a tu disposición</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <i class="fas fa-chart-line text-4xl text-green-600 mb-4"></i>
+                        <h4 class="text-xl font-semibold mb-2">Resultados</h4>
+                        <p>Mejora comprobada en la productividad</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- Sección de Contacto -->
+        <section id="contacto" class="py-16 bg-green-50">
+            <div class="container mx-auto px-4">
+                <h3 class="text-3xl font-bold mb-8 text-center text-green-800">Contáctanos</h3>
+                <!-- Campos del formulario -->
+                <form class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
+                    <div class="mb-4">
+                        <label for="nombre" class="block text-gray-700 font-bold mb-2">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-700 font-bold mb-2">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="mensaje" class="block text-gray-700 font-bold mb-2">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition duration-300">Enviar Mensaje</button>
+                    </div>
+                </form>
+            </div>
+        </section>
     </main>
-
-    <footer class="bg-green-800 text-white py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 AgroTOÑO. Todos los derechos reservados.</p>
+<!-- Pie de página -->
+    <footer class="bg-green-800 text-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">AgroTOÑO</h3>
+                    <p>Soluciones inteligentes para una agricultura sostenible.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contacto</h3>
+                    <p>Email: info@agrotono.com</p>
+                    <p>Teléfono: +34 123 456 789</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Síguenos</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-2xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-2xl"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Aviso de derechos de autor -->
+            <div class="mt-8 text-center">
+                <p>© 2024 AgroTOÑO. Todos los derechos reservados.</p>
+            </div>
         </div>
     </footer>
-
+    <!-- Botón de alternancia del chatbot -->
     <div id="chatbot-toggle" class="chatbot-toggle">
         <span class="text-2xl">💬</span>
     </div>
     <div id="chatbot-container" class="chatbot-container"></div>
 
+<!-- efecto carrusel -->
+    <script>
+        $(document).ready(function(){
+            $('.image-carousel').slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                adaptiveHeight: true,
+                autoplay: true,
+                autoplaySpeed: 3000
+            });
+        });
+    </script>
+<!-- chatbot -->
     <script type="text/babel">
         const agricultureResponses = {
-            "hola": "¡Hola! Soy Don Toño, tu asistente virtual en temas agrícolas. ¿En qué puedo ayudarte hoy?",
+            "hola": "¡Hola! Soy Don Toño, tu asistente virtual en temas agrícolas, como plagas, agua o tal vez suelo. ¿En qué puedo ayudarte hoy?.",
             "plagas": "Para controlar plagas, combina técnicas como el manejo integrado de plagas (MIP), trampas biológicas, uso de insectos benéficos y pesticidas naturales como el aceite de neem.",
             "agua": "Para una gestión eficiente del agua, utiliza riego por goteo, cosecha de agua de lluvia, y mantén la humedad del suelo con técnicas como el acolchado.",
             "suelo": "Mejora la productividad del suelo utilizando abonos orgánicos, compost, y realiza análisis periódicos para ajustar la fertilización según las necesidades del cultivo.",
@@ -238,7 +364,7 @@
                 <div className="flex flex-col h-full">
                     <div className="chatbot-header">
                         <div className="flex items-center">
-                            <img src="dontoño.png" alt="POLIBot" />
+                            <img src="img\dontoño.png" alt="POLIBot" />
                             <h2 className="text-xl font-bold ml-2">Don Toño</h2>
                         </div>
                         <button id="chatbot-close">&times;</button>

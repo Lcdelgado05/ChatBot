@@ -380,25 +380,43 @@
         </section>
 
         <section class="section">
+<<<<<<< HEAD
             <h2 style="font-size: 2.5em;"><strong>Nuestros Servicios</strong></h2>
             <div class="gridd">
                 <div class="card zoom-card">
                     <img src="img\4.jpg" alt="Control de Plagas" width="300" height="200">
                     <h3 style="font-size: 1.5em;"><strong>Control de Plagas</strong></h3>
+=======
+            <h2>Nuestros Servicios</h2>
+            <div class="gridd">
+                <div class="card zoom-card">
+                    <img src="" alt="Control de Plagas" width="300" height="200">
+                    <h3>Control de Plagas</h3>
+>>>>>>> 0c7a931fea1d80f5700724c78ea6e2540905fddf
                     <p>
                         Estrategias efectivas y sostenibles para el manejo de plagas en cultivos.
                     </p>
                 </div>
                 <div class="card zoom-card">
+<<<<<<< HEAD
                     <img src="img\5.jpg" alt="Gestión del Agua" width="300" height="200">
                     <h1 style="font-size: 1.5em;"><strong>Gestión del Agua</strong></h1>
+=======
+                    <img src="" alt="Gestión del Agua" width="300" height="200">
+                    <h3>Gestión del Agua</h3>
+>>>>>>> 0c7a931fea1d80f5700724c78ea6e2540905fddf
                     <p>
                         Optimización del uso del agua para una agricultura más eficiente y sostenible.
                     </p>
                 </div>
                 <div class="card zoom-card">
+<<<<<<< HEAD
                     <img src="img\6.jpeg" alt="Productividad del Suelo" width="300" height="200">
                     <h3 style="font-size: 1.5em;"><strong>Productividad del Suelo</strong></h3>
+=======
+                    <img src="" alt="Productividad del Suelo" width="300" height="200">
+                    <h3>Productividad del Suelo</h3>
+>>>>>>> 0c7a931fea1d80f5700724c78ea6e2540905fddf
                     <p>
                         Técnicas avanzadas para mejorar y mantener la salud y fertilidad del suelo.
                     </p>
@@ -494,6 +512,10 @@
 
     <script type="text/babel">
         const agricultureResponses = {
+<<<<<<< HEAD
+=======
+            "hola": "¡Hola! Soy Don Toño, tu asistente virtual en temas agrícolas. ¿En qué puedo ayudarte hoy?",
+>>>>>>> 0c7a931fea1d80f5700724c78ea6e2540905fddf
             "plagas": "Para controlar plagas, combina técnicas como el manejo integrado de plagas (MIP), trampas biológicas, uso de insectos benéficos y pesticidas naturales como el aceite de neem.",
             "agua": "Para una gestión eficiente del agua, utiliza riego por goteo, cosecha de agua de lluvia, y mantén la humedad del suelo con técnicas como el acolchado.",
             "suelo": "Mejora la productividad del suelo utilizando abonos orgánicos, compost, y realiza análisis periódicos para ajustar la fertilización según las necesidades del cultivo.",
@@ -520,12 +542,19 @@
             "innovacion agricola": "Adopta innovaciones como sensores de humedad, inteligencia artificial para el análisis de datos de cultivo y maquinaria autónoma para mejorar la productividad."
         };
 
+<<<<<<< HEAD
             const ChatBot = () => {
                 const [messages, setMessages] = React.useState([]);
                 const [inputMessage, setInputMessage] = React.useState('');
                 const [userName, setUserName] = React.useState('');
                 const [isNameAsked, setIsNameAsked] = React.useState(false);
                 const messagesEndRef = React.useRef(null);
+=======
+        const ChatBot = () => {
+            const [messages, setMessages] = React.useState([]);
+            const [inputMessage, setInputMessage] = React.useState('');
+            const messagesEndRef = React.useRef(null);
+>>>>>>> 0c7a931fea1d80f5700724c78ea6e2540905fddf
 
             const scrollToBottom = () => {
                 messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -533,12 +562,15 @@
 
             React.useEffect(scrollToBottom, [messages]);
 
+<<<<<<< HEAD
             React.useEffect(() => {
                 const botMessage = { text: "¡Hola! Antes de empezar, ¿cómo te llamas?", sender: 'bot' };
                 setMessages([botMessage]);
                 setIsNameAsked(true);
             }, []);
 
+=======
+>>>>>>> 0c7a931fea1d80f5700724c78ea6e2540905fddf
             const handleSendMessage = () => {
                 if (inputMessage.trim() === '') return;
 
@@ -546,13 +578,18 @@
                 setMessages(prevMessages => [...prevMessages, userMessage]);
 
                 setTimeout(() => {
+<<<<<<< HEAD
                     const botResponse = getBotResponse(inputMessage);
+=======
+                    const botResponse = { text: getBotResponse(inputMessage), sender: 'bot' };
+>>>>>>> 0c7a931fea1d80f5700724c78ea6e2540905fddf
                     setMessages(prevMessages => [...prevMessages, botResponse]);
                 }, 1000);
 
                 setInputMessage('');
             };
 
+<<<<<<< HEAD
                 const getBotResponse = (input) => {
                 if (!userName) {
                     setUserName(input.trim());
@@ -629,6 +666,16 @@
                     const botResponse = getBotResponse(reply);
                     setMessages(prevMessages => [...prevMessages, botResponse]);
                 }, 1000);
+=======
+            const getBotResponse = (input) => {
+                const lowercaseInput = input.toLowerCase();
+                for (const key in agricultureResponses) {
+                    if (lowercaseInput.includes(key)) {
+                        return agricultureResponses[key];
+                    }
+                }
+                return "Interesante pregunta. Como asistente en temas agrícolas, puedo ayudarte con información sobre gestión de plagas, conservación del agua, y técnicas de cultivo sostenible. ¿Podrías reformular tu pregunta o especificar más sobre qué área de la agricultura te interesa?";
+>>>>>>> 0c7a931fea1d80f5700724c78ea6e2540905fddf
             };
 
             return (
@@ -644,6 +691,7 @@
                         {messages.map((message, index) => (
                             <div key={index} className={`message ${message.sender}`}>
                                 <div className="text">{message.text}</div>
+<<<<<<< HEAD
                                 {message.quickReplies && (
                                     <div className="quick-replies mt-2">
                                         {message.quickReplies.map((reply, replyIndex) => (
@@ -657,6 +705,8 @@
                                         ))}
                                     </div>
                                 )}
+=======
+>>>>>>> 0c7a931fea1d80f5700724c78ea6e2540905fddf
                             </div>
                         ))}
                         <div ref={messagesEndRef} />
@@ -681,6 +731,7 @@
             );
         };
 
+<<<<<<< HEAD
         // Renderiza el componente ChatBot en el contenedor
         ReactDOM.render(<ChatBot />, document.getElementById('chatbot-container'));
 
@@ -696,6 +747,16 @@
 
         // Cierre del chat al hacer clic en el botón de cierre
         document.addEventListener('click', function(event) {
+=======
+        ReactDOM.render(<ChatBot />, document.getElementById('chatbot-container'));
+
+        document.getElementById('chatbot-toggle').addEventListener('click', function() {
+            const chatbotContainer = document.getElementById('chatbot-container');
+            chatbotContainer.style.display = chatbotContainer.style.display === 'none' || chatbotContainer.style.display === '' ? 'flex' : 'none';
+        });
+
+        document.getElementById('chatbot-container').addEventListener('click', function(event) {
+>>>>>>> 0c7a931fea1d80f5700724c78ea6e2540905fddf
             if (event.target.id === 'chatbot-close') {
                 document.getElementById('chatbot-container').style.display = 'none';
             }
@@ -703,4 +764,9 @@
 
     </script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+
+>>>>>>> 0c7a931fea1d80f5700724c78ea6e2540905fddf

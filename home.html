@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@0.263.1/dist/umd/lucide.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroTOÑO</title>
+    <style>
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0fff4;
+            color: #276749;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Encabezado y pie de página */
+        header, footer {
+            background-color: #2f855a;
+            color: white;
+            padding: 1rem;
+        }
+
+        header .container, footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 1rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        footer .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        footer .social-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Contenido principal */
+        main {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            box-sizing: border-box; /* Incluye padding en el ancho total */
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        /* Estilos de componentes */
+        .hero {
+            background: linear-gradient(135deg, #a4c639 0%, #9bde1c 100%);
+            color: white;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .challenge-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .challenge-card:hover, .zoom-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .zoom-card {
+            transition: transform 0.3s ease;
+        }
+
+        .zoom-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Botón */
+        .button {
+            display: inline-block;
+            background-color: #38a169;
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #2f855a;
+        }
+
+        /* Layouts */
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .flex-item {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajusta automáticamente las columnas */
+            gap: 1rem;
+        }
+
+        .gridd {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        /* Imágenes */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+
+        /* Galería de imágenes con desplazamiento automático */
+        .scroll-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .scroll-content {
+            display: flex;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+
+        .scroll-item {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 250px;
+        }
+
+        .scroll-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Contenedor de video */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0.5rem;
+        }
+
+        /* Estilos del chatbot */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4a5568;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatbot-container {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background-color: #f7f9f1;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+        }
+
+        .chatbot-header {
+            background-color: #4a773c;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-header img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .chatbot-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .chatbot-input {
+            display: flex;
+            border-top: 1px solid #ccc;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-bottom-left-radius: 10px;
+        }
+
+        .chatbot-input button {
+            background-color: #4a773c;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-bottom-right-radius: 10px;
+            cursor: pointer;
+        }
+
+        .message {
+            margin-bottom: 10px;
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message.bot {
+            text-align: left;
+        }
+
+        .message .text {
+            display: inline-block;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .message.user .text {
+            background-color: #4a773c;
+            color: white;
+        }
+
+        .message.bot .text {
+            background-color: #e3f9e5;
+            color: black;
+        }
+
+        /* Media queries */
+        @media (max-width: 768px) {
+            header .container, footer .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav ul {
+                margin-top: 1rem;
+            }
+            .flex-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AgroTOÑO</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">¿Por qué elegirnos?</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Carrusel de imágenes -->
+        <div class="scroll-container" aria-label="Auto-scrolling image gallery">
+            <div class="scroll-content">
+                <div class="scroll-item">
+                    <img src="img/2.jpg" alt="Image 1">
+                </div>
+                <div class="scroll-item">
+                    <img src="img/3.jpg" alt="Image 2">
+                </div>
+                <div class="scroll-item">
+                    <img src="img/1.jpg" alt="Image 3">
+                </div>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="flex-container">
+                <div class="flex-item">
+                    <h2>Soluciones y Consejos para una Agricultura Sostenible</h2>
+                    <p>
+                        Llevando tu cosecha por los caminos del éxito
+                    </p>
+                    <a href="#" class="button">Descubre Mas &#8594;</a>
+                </div>
+                <div class="flex-item card">
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/wdNcljXs7BI?si=xWz-HQd-TTtSzqwT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 style="font-size: 2.5em;"><strong>Nuestros Servicios</strong></h2>
+            <div class="gridd">
+                <div class="card zoom-card">
+                    <img src="img\4.jpg" alt="Control de Plagas" width="300" height="200">
+                    <h3 style="font-size: 1.5em;"><strong>Control de Plagas</strong></h3>
+                    <p>
+                        Estrategias efectivas y sostenibles para el manejo de plagas en cultivos.
+                    </p>
+                </div>
+                <div class="card zoom-card">
+                    <img src="img\5.jpg" alt="Gestión del Agua" width="300" height="200">
+                    <h1 style="font-size: 1.5em;"><strong>Gestión del Agua</strong></h1>
+                    <p>
+                        Optimización del uso del agua para una agricultura más eficiente y sostenible.
+                    </p>
+                </div>
+                <div class="card zoom-card">
+                    <img src="img\6.jpeg" alt="Productividad del Suelo" width="300" height="200">
+                    <h3 style="font-size: 1.5em;"><strong>Productividad del Suelo</strong></h3>
+                    <p>
+                        Técnicas avanzadas para mejorar y mantener la salud y fertilidad del suelo.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>¿Por qué elegir AgroTOÑO?</h2>
+            <div class="grid">
+                <div class="card zoom-card">
+                    <img src="" alt="Experiencia" width="300" height="200">
+                    <h3>Experiencia</h3>
+                    <p>
+                        Años de experiencia en el sector agrícola
+                    </p>
+                </div>
+                <div class="card zoom-card">
+                    <img src="" alt="Sostenibilidad" width="300" height="200">
+                    <h3>Sostenibilidad</h3>
+                    <p>
+                        Enfoque en prácticas agrícolas sostenibles
+                    </p>
+                </div>
+                <div class="card zoom-card">
+                    <img src="" alt="Soporte" width="300" height="200">
+                    <h3>Soporte</h3>
+                    <p>
+                        Equipo de expertos a tu disposición
+                    </p>
+                </div>
+                <div class="card zoom-card">
+                    <img src="" alt="Resultados" width="300" height="200">
+                    <h3>Resultados</h3>
+                    <p>
+                        Mejora comprobada en la productividad       
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div>
+                <h2>AgroTOÑO</h2>
+                <p>©2024 AgroTOÑO. Todos los derechos reservados</p>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">Facebook</a>
+                <a href="#" aria-label="Instagram">Instagram</a>
+                <a href="#" aria-label="LinkedIn">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const scrollContent = document.querySelector('.scroll-content');
+        const totalItems = document.querySelectorAll('.scroll-item').length;
+    
+        let index = 0, isWaiting = false;
+    
+        function autoScroll() {
+            if (isWaiting) return;
+    
+            index++;
+            if (index >= totalItems) {
+                scrollContent.style.transition = 'none';
+                scrollContent.style.transform = 'translateX(0)';
+                index = 1;
+                isWaiting = true;
+                
+    
+                setTimeout(() => {
+                    scrollContent.style.transition = 'transform 2s ease';
+                    scrollContent.style.transform = `translateX(-${index * 100}%)`;
+                    setTimeout(() => isWaiting = false, 2000);
+                }, 2000);
+            } else {
+                scrollContent.style.transform = `translateX(-${index * 100}%)`;
+            }
+        }
+    
+        setInterval(autoScroll, 5000);
+    </script>
+    
+
+    <div id="chatbot-toggle" class="chatbot-toggle">
+        <span class="text-2xl">💬</span>
+    </div>
+    <div id="chatbot-container" class="chatbot-container"></div>
+
+
+    <script type="text/babel">
+        const agricultureResponses = {
+            "plagas": "Para controlar plagas, combina técnicas como el manejo integrado de plagas (MIP), trampas biológicas, uso de insectos benéficos y pesticidas naturales como el aceite de neem.",
+            "agua": "Para una gestión eficiente del agua, utiliza riego por goteo, cosecha de agua de lluvia, y mantén la humedad del suelo con técnicas como el acolchado.",
+            "suelo": "Mejora la productividad del suelo utilizando abonos orgánicos, compost, y realiza análisis periódicos para ajustar la fertilización según las necesidades del cultivo.",
+            "gracias": "¡De nada! Estoy aquí para ayudarte con cualquier duda sobre agricultura. ¿Hay algo más en lo que pueda asistirte?",
+            "adios": "¡Hasta luego! Recuerda que la agricultura sostenible es clave para el futuro. ¡Sigue cultivando con conciencia!",
+            "riego": "El riego por goteo optimiza el uso del agua y reduce el estrés hídrico de las plantas. Considera el uso de sensores de humedad para optimizar los tiempos de riego.",
+            "fertilizantes": "Usa fertilizantes orgánicos como estiércol, compost o biofertilizantes para mejorar la salud del suelo y reducir la dependencia de productos químicos.",
+            "clima": "Consulta previsiones climáticas para ajustar el riego, la siembra y la cosecha. Planifica barreras naturales o sistemas de protección en caso de climas extremos.",
+            "rotacion de cultivos": "La rotación de cultivos mejora la salud del suelo, ayuda a reducir plagas, y favorece la retención de nutrientes al alternar plantas de diferentes familias.",
+            "control biologico": "Aplica control biológico con insectos benéficos como mariquitas, o introduce hongos y bacterias que combatan las plagas sin perjudicar a los cultivos.",
+            "cosecha": "Realiza la cosecha en el punto óptimo de maduración. Asegúrate de tener las herramientas y el personal adecuados para minimizar las pérdidas.",
+            "invernaderos": "Los invernaderos permiten extender la temporada de cultivo y proteger los cultivos de plagas y condiciones climáticas desfavorables.",
+            "poda": "La poda mejora la ventilación y la exposición solar de las plantas, lo que favorece su crecimiento y previene enfermedades fúngicas.",
+            "conservacion de agua": "Aplica técnicas como el uso de mantillo y la siembra directa para conservar agua y evitar la erosión del suelo.",
+            "biodiversidad": "Fomenta la biodiversidad plantando variedades de cultivos que atraigan polinizadores, y practica la agroforestería para mejorar el ecosistema agrícola.",
+            "cultivos de cobertura": "Los cultivos de cobertura protegen el suelo entre temporadas, mejoran su estructura y previenen la erosión.",
+            "tecnologia agricola": "La agricultura de precisión permite un uso más eficiente de recursos como agua y fertilizantes mediante el análisis de datos y el uso de drones.",
+            "siembra directa": "La siembra directa reduce la erosión del suelo, mejora la retención de humedad y requiere menos trabajo, siendo una opción sostenible para grandes extensiones.",
+            "abono verde": "Utiliza abonos verdes como leguminosas para enriquecer el suelo con nitrógeno y mejorar su estructura entre las temporadas de siembra.",
+            "agroforesteria": "La agroforestería combina árboles y cultivos para mejorar la biodiversidad, proteger el suelo y proporcionar sombra a los cultivos más delicados.",
+            "polinizacion": "Fomenta la polinización natural instalando hábitats para abejas y otros polinizadores. Esto aumentará el rendimiento de tus cultivos.",
+            "desarrollo sostenible": "Implementa prácticas agrícolas sosteni bles como la rotación de cultivos, la reducción del uso de químicos y la conservación del agua para proteger el medio ambiente a largo plazo.",
+            "agricultura sostenible": "La agricultura sostenible es un enfoque que busca maximizar la producción de alimentos de manera eficiente, respetando el medio ambiente, conservando los recursos naturales y promoviendo el bienestar de las comunidades agrícolas.",
+            "innovacion agricola": "Adopta innovaciones como sensores de humedad, inteligencia artificial para el análisis de datos de cultivo y maquinaria autónoma para mejorar la productividad."
+        };
+
+            const ChatBot = () => {
+                const [messages, setMessages] = React.useState([]);
+                const [inputMessage, setInputMessage] = React.useState('');
+                const [userName, setUserName] = React.useState('');
+                const [isNameAsked, setIsNameAsked] = React.useState(false);
+                const messagesEndRef = React.useRef(null);
+
+            const scrollToBottom = () => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            };
+
+            React.useEffect(scrollToBottom, [messages]);
+
+            React.useEffect(() => {
+                const botMessage = { text: "¡Hola! Antes de empezar, ¿cómo te llamas?", sender: 'bot' };
+                setMessages([botMessage]);
+                setIsNameAsked(true);
+            }, []);
+
+            const handleSendMessage = () => {
+                if (inputMessage.trim() === '') return;
+
+                const userMessage = { text: inputMessage, sender: 'user' };
+                setMessages(prevMessages => [...prevMessages, userMessage]);
+
+                setTimeout(() => {
+                    const botResponse = getBotResponse(inputMessage);
+                    setMessages(prevMessages => [...prevMessages, botResponse]);
+                }, 1000);
+
+                setInputMessage('');
+            };
+
+                const getBotResponse = (input) => {
+                if (!userName) {
+                    setUserName(input.trim());
+                    return { 
+                        text: `¡Encantado de conocerte, ${input.trim()}! ¿En qué puedo ayudarte hoy?`,
+                        sender: 'bot',
+                        quickReplies: ['Plagas', 'Suelo', 'Agua']
+                    };
+                }
+
+                const lowercaseInput = input.toLowerCase();
+
+                if (lowercaseInput === 'adios') {
+                return { 
+                    text: `Hasta luego, ${userName}. ¡Que tengas un buen día!`,
+                    sender: 'bot',
+                    quickReplies: [] // No hay respuestas rápidas
+                };
+            }
+                
+                // Reconocimiento de palabras clave
+                for (const key in agricultureResponses) {
+                    if (lowercaseInput.includes(key)) {
+                        // Filtra las respuestas rápidas para que no incluyan la palabra clave ya seleccionada
+                        const remainingResponses = Object.keys(agricultureResponses).filter(
+                             k => k !== key && k !== 'gracias' && k !== 'adios'
+                        );
+
+                        // Selecciona 3 respuestas rápidas aleatorias que no sean la palabra seleccionada
+                        const newQuickReplies = remainingResponses
+                            .sort(() => 0.5 - Math.random())
+                            .slice(0, 3);
+
+                        return { 
+                            text: `${userName}, ${agricultureResponses[key]}`,
+                            sender: 'bot',
+                            quickReplies: newQuickReplies
+                        };
+                    }
+                }
+
+                // Respuestas aleatorias cuando no se entiende la entrada
+                const randomResponses = [
+                    "Interesante pregunta. ¿Podrías reformularla?",
+                    "No estoy seguro de entender. ¿Puedes ser más específico?",
+                    "Hmm, eso es nuevo para mí. ¿Quieres que hablemos de otro tema agrícola?",
+                    "Parece que nos hemos salido un poco del tema. ¿Qué tal si hablamos de plagas o riego?",
+                    "Esa es una perspectiva interesante. ¿Puedes explicarme más?"
+                ];
+
+                const randomResponse = randomResponses[Math.floor(Math.random() * randomResponses.length)];
+
+                const remainingResponses = Object.keys(agricultureResponses).filter(
+                    k => k !== 'gracias' && k !== 'adios'
+                );
+                const newQuickReplies = remainingResponses
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 2);
+                newQuickReplies.push('adios');
+
+                return { 
+                    text: `${userName}, ${randomResponse}`,
+                    sender: 'bot',
+                    quickReplies: newQuickReplies
+                };
+
+            };
+
+            const handleQuickReply = (reply) => {
+                const userMessage = { text: reply, sender: 'user' };
+                setMessages(prevMessages => [...prevMessages, userMessage]);
+
+                setTimeout(() => {
+                    const botResponse = getBotResponse(reply);
+                    setMessages(prevMessages => [...prevMessages, botResponse]);
+                }, 1000);
+            };
+
+            return (
+                <div className="flex flex-col h-full">
+                    <div className="chatbot-header">
+                        <div className="flex items-center">
+                            <img src="img/dontoño.png" alt="donTOÑO" />
+                            <h2 className="text-xl font-bold ml-2">Don Toño</h2>
+                        </div>
+                        <button id="chatbot-close">&times;</button>
+                    </div>
+                    <div className="chatbot-messages" id="chatbot-messages">
+                        {messages.map((message, index) => (
+                            <div key={index} className={`message ${message.sender}`}>
+                                <div className="text">{message.text}</div>
+                                {message.quickReplies && (
+                                    <div className="quick-replies mt-2">
+                                        {message.quickReplies.map((reply, replyIndex) => (
+                                            <button
+                                                key={replyIndex}
+                                                onClick={() => handleQuickReply(reply)}
+                                                className="bg-green-500 text-white px-2 py-1 rounded mr-2 mb-2 text-sm"
+                                            >
+                                                {reply}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                        <div ref={messagesEndRef} />
+                    </div>
+                    <div className="chatbot-input">
+                        <input
+                            type="text"
+                            value={inputMessage}
+                            onChange={(e) => setInputMessage(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                            placeholder="Escribe tu mensaje..."
+                            className="flex-1 border rounded-l-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                        />
+                        <button
+                            onClick={handleSendMessage}
+                            className="bg-green-500 text-white p-2 rounded-r-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+                        >
+                            <span className="text-xl">➤</span>
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // Renderiza el componente ChatBot en el contenedor
+        ReactDOM.render(<ChatBot />, document.getElementById('chatbot-container'));
+
+        // Manejo de la apertura y cierre del chat
+        document.getElementById('chatbot-toggle').addEventListener('click', function() {
+            const chatbotContainer = document.getElementById('chatbot-container');
+            if (chatbotContainer.style.display === 'none' || chatbotContainer.style.display === '') {
+                chatbotContainer.style.display = 'flex';
+            } else {
+                chatbotContainer.style.display = 'none';
+            }
+        });
+
+        // Cierre del chat al hacer clic en el botón de cierre
+        document.addEventListener('click', function(event) {
+            if (event.target.id === 'chatbot-close') {
+                document.getElementById('chatbot-container').style.display = 'none';
+            }
+        });
+
+    </script>
+</body>
+</html>
